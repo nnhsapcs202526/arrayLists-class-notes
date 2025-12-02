@@ -17,6 +17,10 @@ public class ArrayListNotes
         removeLessThanAlt(myList, 10.0);
         System.out.println(myList);
         
+        System.out.println("Average: " + avgList(myList));
+        System.out.println(myList);
+        
+        
     }
     
     /**
@@ -110,10 +114,49 @@ public class ArrayListNotes
         }    
     }
     
-    public static double sumList(ArrayList<Double> list)
+    /**
+     * Averages the numbers in a provided list.
+     * 
+     * @param list the list of numbers to average
+     * @return the computed average 
+     */
+    public static double avgList(ArrayList<Double> list)
     {
-        int sum = 0;
+        double sum = 0;
         
-        return sum;
+        /*
+         * Enhanced for loops
+         * 
+         * Iterates over each element in the ArrayList (without going out of bounds).
+         * 
+         * Similar to the "for value in..." Python syntax.
+         * The value of the loop variable is the actual value of each element in the list, not the index.
+         * 
+         * Java will automatically "unbox" each wrapper class object and assign to a variable of a primitive type.
+         */
+        for(double value : list)
+        {
+            //System.out.println(value);
+            sum += value;
+            
+            /*
+             * Limitations of enhanced for loops
+             * 
+             * The local variable (e.g., value) contains a copy of the element in the list.  We cannot
+             *      easily change the value of an item.
+             */
+            value += 1;
+            
+            /*
+             * Modifying the list (e.g., add, remove, etc) inside an enhanced for loop generates a 
+             *      ConcurrentModificationException.
+             */
+            //list.add(7.7);
+            
+            // We cannot easily deterine an index value for a given element (i.e., the "i" in a regular for loop).
+            
+        }
+        
+        return sum / list.size();
     }
 }
