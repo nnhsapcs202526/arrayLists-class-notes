@@ -13,6 +13,10 @@ public class ArrayListNotes
         ArrayList<Double> myList;
         myList = createRandomDoubleList(10, 20);
         System.out.println(myList);
+        removeLessThanAlt(myList, 10.0);
+        System.out.println(myList);
+        System.out.println("Average: " + avgList(myList));
+        System.out.println(myList);
     }
     
     /**
@@ -85,19 +89,63 @@ public class ArrayListNotes
                  *      shift left.
                  */
                 list.remove(i);
+                i--;
             }
         }
     }
     
     public static void removeLessThanAlt(ArrayList<Double> list, double limit)
     {
-        
+        for(int i = list.size() - 1; i >= 0; i--)
+        {
+            if (list.get(i) < limit)
+            {
+                list.remove(i);
+            }
+        }
     }
     
-    public static double sumList(ArrayList<Double> list)
+    /**
+     * Returns the average from a list of numbers.
+     * 
+     * @param list the list to average
+     * @return the computed average
+     */
+    public static double avgList(ArrayList<Double> list)
     {
-        int sum = 0;
+        double sum = 0;
+        /*
+         * Enhanced for loops
+         * 
+         * Iterates over each elemnt in the list.  Similar to the Python for loop (e.g., for value in...).
+         * The value of the loop variable is the actual value of each element in the list, not the index.
+         * 
+         * Java will automatically "unbox" each Wrapper Class object (e.g., Integer, Double)
+         *      into the appropriate primitive type (int, double).
+         *      
+         * Eliminates the possibility of an out of bound error.
+         */        
+        for (double value : list) // "for each value in the list"
+        {
+            sum += value;
+            /*
+             * Limitations of enhaced for loops:
+             * 
+             * The local variable (e.g., value) contains a copy of the value of the element in the list.
+             * 
+             * We cannot chnage the value of the element directly.
+             */
+            value += 1;
+            
+            /*
+             * Modifying the list (e.g., add, remove, etc.) inside an enhanced for loop generates a
+             *      ConcurrentModificationException.
+             */
+            //list.add(7.7);
+            
+            // We cannot access index values as easily.  The "i" in a regular for loop isn't available.
+        }
         
-        return sum;
+        return sum / list.size();
     }
 }
