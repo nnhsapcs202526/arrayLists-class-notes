@@ -13,7 +13,11 @@ public class ArrayListNotes
         ArrayList<Double> myList;
         myList = createRandomDoubleList(10, 20);
         System.out.println(myList);
-        removeLessThan(myList, 10.0);
+        removeLessThanAlt(myList, 10.0);
+        System.out.println(myList);
+        
+        System.out.println("Average: " + avgList(myList));
+        
         System.out.println(myList);
         
     }
@@ -99,13 +103,65 @@ public class ArrayListNotes
     
     public static void removeLessThanAlt(ArrayList<Double> list, double limit)
     {
-        
+        for(int i = list.size() - 1; i >= 0; i--)
+        {
+            if(list.get(i) < limit)
+            {
+                list.remove(i);
+            }
+        }
     }
     
-    public static double sumList(ArrayList<Double> list)
+    public static double avgList(ArrayList<Double> list)
     {
-        int sum = 0;
+        double sum = 0;
         
-        return sum;
+        /*
+         * Enhanced For Loops
+         * 
+         *   Iterates over each element in the ArrayList.
+         *   Similar to the "for value in..." structure in Python.
+         *   The value of teh loop variable is the value of each element in the ArrayList, not the index.
+         *   
+         *   Java will automatically "unbox" wrapper class opbects (e.g., Integer, Double)
+         *      and assign to variables of primitive type (e.g., int, double).
+         */
+        for(double value : list)
+        {
+            //System.out.println(value);
+            sum += value;
+            
+            /*
+             * Limitations of Enhanced for loops
+             * 
+             * The local variable (e.g., value) contains a copy of the value of the element in the ArrayList.
+             * 
+             * We cannot change the value of the element in the ArrayList directly.
+             */
+            //value += 1;
+            
+            /*
+             * Modifying the list (e.g., add, remove) inside an enhanced for loop generates a concurrent modification
+             *      exception.
+             */
+            //list.add(7.0);
+            
+            // We cannot easily determine the index values of the elements.
+        }
+        
+        return sum / list.size();
     }
+    
+    
+    
+    
+    
+    
+    
+    
+    
+    
+    
+    
+    
 }
